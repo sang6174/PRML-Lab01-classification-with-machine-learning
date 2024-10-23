@@ -1,0 +1,11 @@
+prefix=e:/hcmus/5th-semester/pattern-recognition/prml-lab/PRML-Lab01-classification-with-machine-learning/.venv/Library 
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Libs: -L"${libdir}" -llibcrypto
+Libs.private: -lcrypt32 -lws2_32
+Cflags: -I"${includedir}"
+Version: 3.3.2 
