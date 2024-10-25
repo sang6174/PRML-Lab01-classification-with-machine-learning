@@ -1,0 +1,39 @@
+Report Loading Dataset, Data Processing and EDA
+
+I. Loading Dataset
+
+Sử dụng git để clone đến https://github.com/zalandoresearch/fashion-mnist, 
+thông qua https://github.com/zalandoresearch/fashion-mnist.git. Sau đó copy
+hai thư mục data/fashion và thư mục utils. Lý do phải làm thế này là do không 
+thể download dataset trực tiếp trên repository.
+
+II. Data processing and EDA
+1. Explore data characteristics
+- Ta thấy được kích thức của tập X_train, X_test là (60000, 784) và y_train, y_test là (10000, ).
+- Kiểu của X_train, X_test, y_train, y_test là <class 'numpy.ndarray>.
+- Kiểu dữ liệu của X_train, y_train là uint8.
+
+- Labels distribution: Được đánh số từ 0 đến 9. Mỗi label điều có 6000 example. Điều này cho thấy 
+dataset không bị thiên lệch vào một label nhất định.
+
+2. Handle missing data
+- X_train, X_test điều không có giá trị NaN, cho thấy dataset FASHION-MNIST đã được xử lý sạch từ trước.
+
+3. Perform data tranformation
+- Dữ liệu hình ảnh trong FASHION-MNIST có giá trị từ 0 đến 255. Ta cần chuyển thành float32 và chia cho 
+255.0 để chuẩn hóa về khoảng [0, 1]. Điều này giúp tăng tốc độ hội tụ trong quá trình huấn luyện mô hình.
+- Thay đổi hình dáng của dữ liệu ảnh từ (784, ) sang (-1, 28, 28, 1) để tạo một tensor 4 chiều.
+
+4. Pixel value distribution
+- Giá trị trung bình của pixel cho biết độ sáng trung bình của toàn bộ hình ảnh trong tập dữ liệu. Trong 
+trường hợp này, mean pixel value là khoảng 0.286, có nghĩa là hầu hết các pixel trong hình ảnh có giá trị 
+nằm trong khoảng từ 0 đến 1 và gần với giá trị tối thiểu hơn. Giúp chúng ta tính giá trị đầu vào cho mô hình.
+- Độ lệch chuẩn khoảng 0.353 cho thấy rằng các giá trị pixel trong tập dữ liệu có sự biến động nhất định.
+- Từ đồ thị "Pixel Value Distribution" cho ta thấy giá trị pixel tập trung phần lớn gần 0. Chiếm phần lớn pixels, 
+phần còn lại thì phân bố khá đồng đều trên phần còn lại của khoảng giá trị của pixel.
+
+5. Handle outlier
+Z-score phát hiện ra nhiều outliers có thể do nó nhạy cảm với sự phân bố dữ liệu. Nếu dữ liệu có các giá trị 
+rất thấp hoặc rất cao, chúng sẽ có Z-score cao, dẫn đến việc được xem là ngoại lệ.
+IQR là một phương pháp mạnh mẽ hơn đối với dữ liệu phân phối không chuẩn. Việc không phát hiện ra bất kỳ outliers 
+nào bằng IQR cho thấy rằng dữ liệu pixel của bạn có thể được phân bố đồng đều hơn trong khoảng từ Q1 đến Q3.
