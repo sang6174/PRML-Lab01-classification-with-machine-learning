@@ -1,0 +1,33 @@
+Curse of Dimensionality và ảnh hưởng của nó đến các mô hình học máy, đặc biệt trong không gian có số chiều cao.
+
+1.Curse of Dimensionality là gì?(Lời nguyền chiều)
+-Curse of Dimensionality ám chỉ hiện tượng mà hiệu quả và hiệu suất của các thuật toán giảm sút khi chiều dữ liệu tăng theo cấp số nhân.
+-Trong không gian có nhiều chiều, các điểm dữ liệu trở nên thưa thớt, khiến việc phân biệt các mẫu hoặc mối quan hệ có ý nghĩa trở nên khó khăn do lượng dữ liệu khổng lồ cần thiết để lấy mẫu không gian một cách đầy đủ.
+-Curse of Dimensionality tác động đáng kể đến các thuật toán học máy theo nhiều cách khác nhau. Nó dẫn đến tăng độ phức tạp tính toán, thời gian đào tạo dài hơn và yêu cầu tài nguyên cao hơn. Hơn nữa, nó làm tăng nguy cơ quá khớp và tương quan giả, cản trở khả năng khái quát hóa tốt của các thuật toán đối với dữ liệu chưa biết.
+
+2.Ảnh hưởng đến các mô hình máy học
+ 2.1 Tăng độ phức tạp của mô hình và hiện tượng overfitting
+-Trong không gian cao chiều, các mô hình, đặc biệt là mô hình phi tuyến như mạng nơ-ron, có xu hướng overfitting bằng cách học nhiễu trong dữ liệu như các mẫu, dẫn đến khả năng tổng quát hóa kém khi gặp dữ liệu mới.
+
+ 2.2 Các thuật toán dựa trên khoảng cách
+-Đối với các thuật toán như k-NN, hiệu quả của chúng phụ thuộc vào các thước đo khoảng cách. Tuy nhiên, trong không gian cao chiều, sự khác biệt giữa các khoảng cách giảm đi, làm cho tất cả các điểm gần như cách đều nhau, khiến k-NN mất đi tính hiệu quả của nó.
+
+ 2.3 Tăng chi phí tính toán
+Dữ liệu cao chiều đòi hỏi nhiều tài nguyên tính toán hơn, đặc biệt với các thuật toán dựa trên phép tính ma trận (ví dụ: SVM, mạng nơ-ron). Số lượng chiều càng lớn làm tăng số lượng phép tính, khiến thời gian xử lý chậm lại và tăng nhu cầu về bộ nhớ.
+
+3.Cách giảm thiểu ảnh hưởng của Lời nguyền chiều
+ 3.1 Các kỹ thuật giảm chiều
+ -Phân tích thành phần chính (PCA): PCA giảm số chiều bằng cách tìm các trục có phương sai lớn nhất. Bằng cách chiếu dữ liệu lên các thành phần chính này, PCA có thể giữ lại phần lớn phương sai của dữ liệu với số chiều ít hơn.
+ -Phân tích biệt thức tuyến tính (LDA): LDA hữu ích cho các tác vụ phân loại, giúp giảm chiều bằng cách tối đa hóa sự tách biệt giữa các lớp, rất phù hợp khi dữ liệu đã có nhãn.
+ -t-SNE và UMAP: Cả hai đều là kỹ thuật giảm chiều phi tuyến, phù hợp để trực quan hóa và phân tích sơ bộ dữ liệu bằng cách nhóm các điểm dữ liệu dựa trên tính chất khoảng cách.
+ 3.2 Chọn lựa đặc trưng
+ -Phương pháp thống kê: Các kỹ thuật như ANOVA hoặc kiểm định chi-square giúp chọn và giữ lại các đặc trưng có mối quan hệ mạnh mẽ với biến mục tiêu.
+ -Phương pháp nhúng: Các thuật toán như hồi quy Lasso và các phương pháp dựa trên cây thực hiện lựa chọn đặc trưng trong quá trình huấn luyện mô hình, giúp giảm các chiều không cần thiết.
+ 3.3 Các kỹ thuật điều chuẩn
+ -Các phương pháp điều chuẩn như L1 và L2 giúp giảm độ phức tạp của mô hình, hạn chế hiện tượng quá khớp trong không gian cao chiều bằng cách phạt các trọng số lớn trong mạng nơ-ron hoặc mô hình hồi quy.
+
+ 3.4 Tăng kích thước mẫu và dữ liệu
+ -Tăng số lượng điểm dữ liệu có thể giảm bớt một số vấn đề của không gian cao chiều. Các phương pháp như tăng cường dữ liệu (đối với ảnh) hoặc thu thập thêm mẫu dữ liệu giúp mô hình tổng quát hóa tốt hơn.
+
+4. Kết luận
+Curse of Dimensionality là một thách thức đáng kể trong học máy, bởi dữ liệu có số chiều cao ảnh hưởng đến khả năng diễn giải của mô hình, hiệu quả tính toán và khả năng tổng quát hóa. Áp dụng các kỹ thuật giảm chiều, lựa chọn đặc trưng, điều chuẩn và tận dụng các thuật toán chuyên biệt như CNN hoặc embedding giúp giảm thiểu các ảnh hưởng của lời nguyền chiều. Tuy nhiên, cách tiếp cận dữ liệu cao chiều cần linh hoạt, cân nhắc đến sự cân bằng giữa hiệu quả tính toán và độ chính xác của mô hình.
