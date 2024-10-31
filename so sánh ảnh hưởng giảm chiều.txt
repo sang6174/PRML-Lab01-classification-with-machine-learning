@@ -1,0 +1,22 @@
+So sánh sự ảnh hưởng của việc giảm chiều đến hiệu suất của mô hình
+1. Tốc độ tính toán
+Trước khi giảm chiều: Với số chiều cao, thời gian xử lý mô hình sẽ lâu hơn.
+Sau khi giảm chiều: Giảm chiều giúp giảm số lượng đặc trưng, nhờ đó mô hình có thể huấn luyện và dự đoán nhanh hơn. Điều này có lợi với các mô hình phức tạp hoặc các thuật toán có độ phức tạp cao như SVM hoặc K-NN, vì chúng có thể bị ảnh hưởng nhiều khi số chiều tăng.
+
+2. Độ chính xác của mô hình
+Trước khi giảm chiều: dữ liệu chứa nhiều đặc trưng nhiễu, việc giữ nguyên tất cả các đặc trưng có thể gây overfitting.
+Sau khi giảm chiều: Giảm chiều giúp loại bỏ các đặc trưng nhiễu. Điều này có thể làm tăng hiệu quả và khả năng khái quát hóa của mô hình, đặc biệt là khi dữ liệu chứa nhiều đặc trưng dư thừa. Tuy nhiên, nếu giảm chiều quá nhiều, có thể mất đi thông tin quan trọng, dẫn đến việc giảm độ chính xác.
+
+3. Hiệu suất tổng thể (trade-off giữa tốc độ và độ chính xác)
+Với PCA: PCA giữ lại các trục có phương sai lớn nhất, nhưng không đảm bảo sự tách biệt giữa các lớp, do đó, PCA có thể phù hợp hơn cho các bài toán không phân loại. Trong các bài toán phân loại, PCA đôi khi có thể làm giảm độ chính xác vì nó không tối ưu hóa khoảng cách giữa các lớp.
+Với LDA: LDA tối ưu hóa khoảng cách giữa các lớp, nên hiệu quả hơn trong các bài toán phân loại. Sau khi giảm chiều bằng LDA, mô hình phân loại có thể đạt độ chính xác cao hơn so với khi giảm chiều bằng PCA vì LDA ưu tiên sự phân tách giữa các lớp.
+
+4. Tính ổn định và khả năng khái quát hóa
+Trước khi giảm chiều: Mô hình với nhiều đặc trưng có thể không ổn định, đặc biệt là với các tập dữ liệu nhỏ hoặc dữ liệu có tính chất đa chiều.
+Sau khi giảm chiều: Bằng cách tập trung vào các đặc trưng quan trọng, việc giảm chiều có thể giúp mô hình trở nên ổn định hơn và khái quát hóa tốt hơn, nhờ đó giảm nguy cơ overfitting và cải thiện khả năng dự đoán trên dữ liệu chưa thấy.
+
+Tóm lại:
+việc giảm chiều có thể cải thiện hiệu suất của mô hình theo các cách sau:
+Giảm thời gian tính toán: Nhờ giảm số lượng đặc trưng, mô hình sẽ nhanh hơn và tiêu tốn ít tài nguyên hơn.
+Tăng độ chính xác: Giảm chiều giúp loại bỏ đặc trưng dư thừa, giảm nguy cơ overfitting và giúp mô hình khái quát tốt hơn.
+Cải thiện khả năng khái quát hóa: Với các đặc trưng quan trọng nhất, mô hình có thể hoạt động ổn định hơn và dự đoán chính xác hơn trên dữ liệu kiểm tra.
