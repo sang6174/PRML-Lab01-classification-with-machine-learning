@@ -1,0 +1,81 @@
+I. Đánh giá hiệu suất mô hình trên tập kiểm tra: 
+-Accuracy: 0.86, nghĩa là mô hình phân loại đúng 86% trong tổng số 9600 mẫu.
+-Precision, Recall, và F1 Score (Trung bình): Cả ba chỉ số đều đạt 0.86, cho thấy mô hình có độ chính xác và khả năng nhận diện đồng đều trên các lớp.
+-Macro Average: Trung bình cộng các chỉ số của từng lớp, không phụ thuộc vào số lượng mẫu trong mỗi lớp. Giá trị 0.86 cho thấy mô hình có hiệu suất đồng đều trên tất cả các lớp.
+-Weighted Average: Trung bình cộng có trọng số theo số lượng mẫu của từng lớp, phản ánh mức độ hiệu suất của mô hình trên toàn bộ tập dữ liệu. Giá trị 0.86 cho cả Precision, Recall và F1 Score cho thấy mô hình không thiên lệch và có độ chính xác đồng đều trên tất cả các lớp.
+
+II.	Phân tích confusion matrix:
+***Chú thích:
+- Đường chéo chính: Các ô trên đường chéo chính (như ô (0,0), (1,1),...) biểu thị số lượng mẫu được mô hình dự đoán đúng cho từng lớp. Các ô ngoài đường chéo chính thể hiện số lượng mẫu mà mô hình dự đoán sai.
+- Hàng (True Labels): Đại diện cho nhãn thực tế của dữ liệu.
+- Cột (Predicted Labels): Đại diện cho nhãn mà mô hình dự đoán.
+Nhãn		    Số mẫu đúng		Số mẫu mà mô hình đã dự đoán.
+0: T-shirt/top		749		[749, 3, 11, 34, 5, 1, 92, 0, 14, 0]
+1: Trouser		    897		[2, 897, 3, 24, 3, 1, 0, 0, 0 ,0]
+2: Pullover		    719		[14, 5, 719, 17, 103, 0, 97, 0, 6, 0]
+3: Dress			830		[35, 12, 10, 830, 28, 0, 25, 0, 2, 0]
+4: Coat			    750		[4, 2, 78, 34, 750, 0, 90, 0, 2, 0]
+5: Sandal		    889		[1, 2, 0, 0, 0, 889, 1, 30, 9, 12]
+6: Shirt			563		[117, 3, 104, 32, 92, 2, 563, 0, 16, 0]
+7: Sneaker		    924		[0, 0, 0, 0, 0, 40, 0, 924, 4, 35]
+8: Bag			    949		[5, 2, 3, 10, 7, 5, 19, 2, 949, 1]
+9: Ankle boot		915		[1, 1, 0, 1, 0, 19, 0, 36, 1, 915]
+
+Các nhầm lẫn trong dự đoán::
+
+***Nhãn 0: T-shirt/top 
+Đúng: Mô hình phân loại đúng 794 mẫu (0,0).
+Sai: Mô hình nhầm lẫn  nhiều nhất 92 mẫu của nhãn 0 thành nhãn 6, và 34 mẫu thành nhãn 3. Điều này cho thấy nhãn 0 có sự nhầm lẫn tương đối với các nhãn 6 và 3.
+-> Các mẫu thuộc nhãn 0 có vẻ dễ nhầm với nhãn 6. Cần xác minh xem nhãn 0 và nhãn 6 có sự tương đồng nào về đặc điểm hay không để tìm cách cải thiện.
+***Nhãn 1: Trouser
+Đúng: Phân loại đúng 897 mẫu (1,1).
+Sai: Chỉ có một số ít nhầm lẫn sang các lớp khác (cao nhất là 24 cho nhãn 3). 
+-> Mô hình nhận diện tốt cho nhãn này.
+***Nhãn 2: Pullover
+Đúng: Phân loại đúng 719 mẫu (2,2).
+Sai: Mô hình nhầm lẫn 103 mẫu của nhãn 2 thành nhãn 4, 97 mẫu thành nhãn 6, 14 và 17 mẫu lần lượt cho nhãn 0 với nhãn 3, 5 mẫu ở nhãn 1.
+-> Mô hình gặp khó khăn trong việc phân biệt nhãn 2 với nhãn 4 và nhãn 6.
+***Nhãn 3: Dress
+Đúng: Phân loại đúng 830 mẫu (3,3).
+Sai: Có nhầm lẫn nhiều ở nhãn 0, nhãn 4 và nhãn 6, với số mẫu lần lượt là 35, 28, 25.
+-> Nhãn 3 và nhãn 0 có thể có sự tương đồng về đặc điểm (có thể cả hai nhãn đều là loại trang phục giống nhau), dẫn đến nhầm lẫn.
+***Nhãn 4: Coat
+Đúng: 750 mẫu được phân loại đúng (4,4).
+Sai: Có nhầm lẫn đáng kể với nhãn 6 (92 mẫu) và nhãn 2 (78 mẫu).
+-> Nhầm lẫn nhiều với nhãn 6 và nhãn 2 cho thấy nhãn 4, 2 và 6 có nhiều điểm tương đồng
+***Nhãn 5: Sandal
+Đúng: Mô hình phân loại đúng 889 mẫu (5,5).
+Sai: Nhầm lẫn ít, chỉ một số mẫu nhầm lẫn với các nhãn khác, cao nhất là 30 mẫu với nhãn 7,  cho thấy mô hình nhận diện tốt cho nhãn này.
+-> Mô hình phân loại tốt nhãn 5.
+***Nhãn 6: Shirt.
+Đúng: 563 mẫu được phân loại đúng (6,6).
+Sai: Đây là nhãn có nhiều nhầm lẫn nhất, đặc biệt là nhầm sang nhãn 0 (117 mẫu), nhãn 2 (104 mẫu), nhãn 4 (92 mẫu). 
+-> Đây là nhãn dễ bị nhầm lẫn nhất trong mô hình, có nhầm lẫn với hầu hết các nhãn. Nhãn 6 có thể có điểm không rõ ràng hoặc dễ bị ảnh hưởng bởi các nhãn khác.
+***Nhãn 7: Sneaker.
+Đúng: Nhãn có số lượng dự đoán đúng cao, 924 mẫu tương ứng (7,7).
+Sai: Một vài mẫu bị nhầm với nhãn 5 (40 mẫu) và nhãn 9 (30 mẫu).
+-> Mô hình phân loại tốt nhãn này, có thể vì đặc điểm của nhãn 7 rõ ràng, dễ phân biệt với các nhãn khác.
+***Nhãn 8: Bag.
+Đúng: 949 mẫu được phân loại đúng (8,8).
+Sai: Chỉ có một vài mẫu bị nhầm nhỏ với nhãn 3 (10 mẫu) và nhãn 6 (19 mẫu).
+-> Mô hình phân loại tốt nhãn này.
+***Nhãn 9: Ankle boot.
+Đúng: 915 mẫu được phân loại đúng (9,9).
+Sai: Nhầm với nhãn 5 (19 mẫu) và nhãn 7 (35 mẫu).
+-> Mô hình phân loại tốt nhãn này.
+
+Nhận xét chung:
+- Các nhãn có hiệu suất tốt: nhãn 1, nhãn 5, nhãn 7, nhãn 8, nhãn 9.
+- Các nhãn có hiệu suất trung bình: nhãn 0, nhãn 3, nhãn 4.
+- Các nhãn có hiệu suất thấp: nhãn 6, nhãn 2.
+
+Các cặp dễ bị nhầm lẫn:
+- Nhãn 0 và Nhãn 6: Có 92 mẫu từ nhãn 0 nhầm sang nhãn 6 và 117 mẫu từ nhãn 6 nhầm sang nhãn 0. Đây là cặp nhãn dễ nhầm lẫn nhất, có thể là do hình dạng hoặc sắc thái tương đồng.
+- Nhãn 2 và Nhãn 4: Có 103 mẫu từ nhãn 2 nhầm sang nhãn 4 và 78 mẫu từ nhãn 4 nhầm sang nhãn 2. Điều này cho thấy nhãn 2 và nhãn 4 có sự tương đồng nào đó, khiến mô hình gặp khó khăn trong việc phân biệt.
+- Nhãn 3 và Nhãn 4: Có 28 mẫu từ nhãn 3 nhầm sang nhãn 4. Mặc dù không quá cao, nhưng vẫn đáng chú ý, cho thấy một mức độ tương đồng nhất định giữa hai nhãn này.
+
+Dẫn: 
+Qua phân tích chi tiết từ ma trận nhầm lẫn, chúng ta nhận thấy một số nhãn có độ chính xác chưa cao và dễ bị nhầm lẫn với các nhãn khác, đặc biệt là nhãn 6. Điều này có thể do Logistic Regression là một mô hình tuyến tính và chỉ có thể phân loại tốt khi dữ liệu có ranh giới phân tách tuyến tính rõ ràng giữa các nhãn. Trong những trường hợp dữ liệu phức tạp hoặc có sự chồng chéo giữa các nhãn, mô hình tuyến tính có thể không đủ mạnh để nắm bắt toàn bộ đặc trưng của dữ liệu.
+Để cải thiện khả năng phân loại, ta thử chuyển sang Support Vector Machine (SVM), để phân tách các lớp và tạo ra ranh giới phân tách phi tuyến tính khi cần thiết.
+
+
